@@ -21,11 +21,16 @@ public class SvPerro extends HttpServlet {
 
     ArrayList<Perro> misPerros = new ArrayList<>();
 
-    //Metodo para buscar un perro por nombre de lista
+    /**
+     * Metodo para buscar al perro por el nombre
+     *
+     * @param nombre
+     * @return
+     */
     private Perro buscarPerroPorNombre(String nombre) {
         for (Perro perro : misPerros) {
             if (perro.getNombre().equals(nombre)) {
-                return perro; // Retorna  el perro si se encuentra
+                return perro; // Retorna el perro
             }
         }
         return null; // Retorna null si no se encuentra el perro
@@ -36,13 +41,13 @@ public class SvPerro extends HttpServlet {
             throws ServletException, IOException {
 
         String nombre = request.getParameter("nombre");
-        Perro perro = buscarPerroPorNombre(nombre); // Implementa la lógica para buscar el perro en tu lista de perros
+        Perro perro = buscarPerroPorNombre(nombre);
         if (perro != null) {
             // Genera la respuesta HTML con los detalles del perro
             String perroHtml = "<h2>Nombre: " + perro.getNombre() + "</h2>"
                     + "<p>Raza: " + perro.getRaza() + "</p>"
                     + "<p>Puntos: " + perro.getPuntos() + "</p>"
-                    + "<p>Edad (meses): " + perro.getEdad() + "</p>"
+                    + "<p>Edad: " + perro.getEdad() + "</p>"
                     + "<img src='imagenes/" + perro.getImagen() + "' alt='" + perro.getNombre() + "' width='100%'/>";
             response.setContentType("text/html");
             response.getWriter().write(perroHtml);
@@ -97,7 +102,6 @@ public class SvPerro extends HttpServlet {
                 puntos = Integer.parseInt(puntosStr);
             } catch (NumberFormatException e) {
                 // Manejo de error en caso de que no se pueda convertir a int
-                // Puedes mostrar un mensaje de error o realizar alguna acción aquí
             }
         }
         if (edadStr != null && !edadStr.isEmpty()) {
@@ -105,7 +109,6 @@ public class SvPerro extends HttpServlet {
                 edad = Integer.parseInt(edadStr);
             } catch (NumberFormatException e) {
                 // Manejo de error en caso de que no se pueda convertir a int
-                // Puedes mostrar un mensaje de error o realizar alguna acción aquí
             }
         }
 
